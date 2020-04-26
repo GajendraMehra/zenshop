@@ -5,9 +5,9 @@ const bodyParser = require("body-parser")
 const cokkieParser = require("cookie-parser")
 const cors = require("cors")
 const authRoutes = require("./routes/auth")
+const userRoutes = require("./routes/user")
 const port = 8080;
 const app = express();
-console.clear()
 
 // Server starting
 app.listen(port, () => {
@@ -33,3 +33,4 @@ app.use(cors())
 
 // routes
 app.use('/api', authRoutes)
+app.use('/api', userRoutes)

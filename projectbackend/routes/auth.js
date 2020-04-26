@@ -38,9 +38,4 @@ router.post("/signin", [
 ], signin)
 
 
-
-//
-router.get("/test", isSignedIn, (req, res) => {
-    return res.json(req.auth)
-})
 module.exports = router
