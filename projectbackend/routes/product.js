@@ -7,7 +7,9 @@ const {
     getProductById,
     removeProduct,
     updateProduct,
-    getProduct
+    getProduct,
+    addProduct,
+    getPhoto
 } = require("../controllers/product")
 const {
     isSignedIn,
@@ -21,11 +23,13 @@ const {
 
 
 router.param("userId", getUserById)
-router.param("productId", isSignedIn, isAdmin, isAuthenticated, getProductById)
+router.param("productId", getProductById)
 router.param("categoryId", isSignedIn, isAdmin, isAuthenticated, getProductByCatId)
 
 
-
+router.post("/product/create/:userId", isSignedIn, isAdmin, isAuthenticated, addProduct)
+router.get("/product/:productId", getProduct)
+router.get("/product/photo/:productId", getPhoto)
 
 
 module.exports = router
