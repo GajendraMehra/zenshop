@@ -28,8 +28,11 @@ router.param("categoryId", isSignedIn, isAdmin, isAuthenticated, getProductByCat
 
 
 router.post("/product/create/:userId", isSignedIn, isAdmin, isAuthenticated, addProduct)
+router.put("/product/:productId/:userId", isSignedIn, isAdmin, isAuthenticated, updateProduct)
+router.delete("/product/:productId/:userId", isSignedIn, isAdmin, isAuthenticated, removeProduct)
 router.get("/product/:productId", getProduct)
 router.get("/product/photo/:productId", getPhoto)
+
 
 
 module.exports = router

@@ -50,6 +50,7 @@ exports.addProduct = (req, res) => {
                     errMsg: err
                 })
             }
+            product.photo = undefined
             return res.json({
                 product: product
             })
@@ -58,14 +59,42 @@ exports.addProduct = (req, res) => {
 
 }
 exports.removeProduct = (req, res) => {
+    let product = req.product;
+    product.remove((err, product) => {
 
+        if (err || !product) {
+            return res.status(400).json({
+                error: "Products Not found",
+                errMsg: err
+            })
+
+        }
+        req.product.photo = undefined
+        return res.json({
+            "message": "Product Deleted",
+            product: product
+        })
+    })
 }
 
 exports.updateProduct = (req, res) => {
 
 }
 exports.getAllProduct = (req, res) => {
+    Product.find().exec((err, product) => {
 
+
+        if (err || !product) {
+            return res.status(400).json({
+                error: "Products Not found",
+                errMsg: err
+            })
+
+        }
+        return res.json({
+
+        })
+    })
 }
 
 exports.getProductById = (req, res, next, id) => {
