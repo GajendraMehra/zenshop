@@ -9,7 +9,8 @@ const {
     updateProduct,
     getProduct,
     addProduct,
-    getPhoto
+    getPhoto,
+    getAllCategories
 } = require("../controllers/product")
 const {
     isSignedIn,
@@ -32,7 +33,9 @@ router.put("/product/:productId/:userId", isSignedIn, isAdmin, isAuthenticated, 
 router.delete("/product/:productId/:userId", isSignedIn, isAdmin, isAuthenticated, removeProduct)
 router.get("/product/:productId", getProduct)
 router.get("/product/photo/:productId", getPhoto)
+router.get("/products", getAllProduct)
 
 
+router.get("/products/categories", getAllCategories)
 
 module.exports = router
