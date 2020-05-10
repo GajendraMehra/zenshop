@@ -1,6 +1,6 @@
-import React from "react";
+import React,{Fragment} from "react";
 import { Link, withRouter } from "react-router-dom";
-
+import {signout,isAuthenticated} from '../auth/helper'
 const currentTab = (history, path) => {
   if (history.location.pathname === path) {
     return { color: "#2ecc72" };
@@ -12,6 +12,7 @@ const currentTab = (history, path) => {
 const Menu = ({ history }) => (
   <div>
     <ul className="nav nav-tabs bg-dark">
+    <Fragment></Fragment>
       <li className="nav-item">
         <Link style={currentTab(history, "/")} className="nav-link" to="/">
           Home
@@ -26,15 +27,17 @@ const Menu = ({ history }) => (
           Cart
         </Link>
       </li>
+      {isAuthenticated() && isAuthenticated().user.role===0 && (
       <li className="nav-item">
         <Link
           style={currentTab(history, "/user/dashboard")}
           className="nav-link"
           to="/user/dashboard"
         >
-          Dashboard
+          U.Dashboard
         </Link>
-      </li>
+      </li>)}
+      {isAuthenticated() && isAuthenticated().user.role===1 && (
       <li className="nav-item">
         <Link
           style={currentTab(history, "/admin/dashboard")}
@@ -43,8 +46,10 @@ const Menu = ({ history }) => (
         >
           A. Dashboard
         </Link>
-      </li>
-      <li className="nav-item">
+      </li>)}
+      {!isAuthenticated()&&(
+        <Fragment>
+        <li className="nav-item">
         <Link
           style={currentTab(history, "/signup")}
           className="nav-link"
@@ -61,16 +66,19 @@ const Menu = ({ history }) => (
         >
           Sign In
         </Link>
+      </li>  
+        </Fragment>
+      )}
+      {isAuthenticated()&&(
+        <li className="nav-item">
+        <span className="nav-link text-warning" onClick={()=>{
+          signout(()=>{
+            history.push("/")
+          })
+        }}>Sign out</span>
       </li>
-      <li className="nav-item">
-        <Link
-          style={currentTab(history, "/signout")}
-          className="nav-link"
-          to="/signout"
-        >
-          Signout
-        </Link>
-      </li>
+    
+      )}
     </ul>
   </div>
 );
