@@ -31,7 +31,7 @@ router.post("/category/create/:userId", [
     })
 ], isSignedIn, isAuthenticated, isAdmin, saveCategory)
 router.get("/categories/:categoryId/:userId", isSignedIn, isAuthenticated, isAdmin, getCategory)
-router.get("/categories/:userId", isSignedIn, isAuthenticated, isAdmin, getAllCategories)
+router.get("/categories", getAllCategories)
 
 
 router.put("/categories/:categoryId/:userId", [

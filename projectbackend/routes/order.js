@@ -31,7 +31,6 @@ router.get("/order/:orderId", getOrder)
 router.get("/order/all/:userId", isSignedIn, isAuthenticated, isAdmin, getAllOrders)
 
 router.post("/order/new/:userId", isSignedIn, isAuthenticated, userPurchaseList, updateStock, createOrder)
-
 router.get("/order/:orderId/status/:userId", isSignedIn, isAuthenticated, isAdmin, getOrderStatus)
 router.put("/order/:orderId/status/:userId", isSignedIn, isAuthenticated, isAdmin, updateOrderStatus)
 module.exports = router

@@ -9,7 +9,7 @@ exports.addProduct = (req, res) => {
     form.parse(req, (err, fields, file) => {
         if (err) {
             return res.status(400).json({
-                error: "Not abe to save",
+                error: "Not able to save",
                 errMsg: err
             })
         }
