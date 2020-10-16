@@ -4,7 +4,7 @@
   "description": "Back end of eccommerce site ",
   "main": "app.js",
   "scripts": {
-   "start":"nodemon app"
+    "start": "nodemon app"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -22,7 +22,7 @@
     "nodemon": "^1.19.4",
     "uuid": "^3.3.3"
   },
-  "keywords": [   
+  "keywords": [
     "node",
     "react",
     "express"
