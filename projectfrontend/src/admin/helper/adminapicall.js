@@ -78,7 +78,7 @@ export const deleteProduct = (productId, userId, token) => {
     })
     .catch(err => console.log(err));
 };
-
+  
 // delete category
 export const deleteCategory = (productId, userId, token) => {
   return fetch(`${API}/category/${productId}/${userId}`, {
@@ -108,7 +108,7 @@ export const getProduct = productId => {
 
 //update a product
 
-export const updateProduct = (productId, userId, token, product) => {
+export const updateaProduct = (productId, userId, token, product) => {
   return fetch(`${API}/product/${productId}/${userId}`, {
     method: "PUT",
     headers: {
