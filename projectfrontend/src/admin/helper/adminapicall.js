@@ -28,6 +28,7 @@ export const getCategories = (token) => {
     },
   })
     .then(response => {
+    
       return response.json();
     })
     .catch(err => console.log(err));
@@ -66,6 +67,21 @@ export const getProducts = () => {
 
 export const deleteProduct = (productId, userId, token) => {
   return fetch(`${API}/product/${productId}/${userId}`, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`
+    }
+  })
+    .then(response => {
+      return response.json();
+    })
+    .catch(err => console.log(err));
+};
+
+// delete category
+export const deleteCategory = (productId, userId, token) => {
+  return fetch(`${API}/category/${productId}/${userId}`, {
     method: "DELETE",
     headers: {
       Accept: "application/json",
