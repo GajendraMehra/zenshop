@@ -17,13 +17,31 @@ export const createCategory = (userId, token, category) => {
     .catch(err => console.log(err));
 };
 
+
+export const updateaCategory = (productId, userId, token, product) => {
+  console.log('product');
+  // console.log(JSON.stringify(product));
+  return fetch(`${API}/categories/${productId}/${userId}`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`
+    },
+    body: 'THIS IS A DESCRIPTION',
+  })
+    .then(response => {
+     console.log(response);
+    })
+    .catch(err => console.log(err));
+};
+
 //get all categories
 export const getCategories = (token) => {
   return fetch(`${API}/categories`, {
     method: "GET",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`
     },
   })
@@ -136,21 +154,4 @@ export const updateaProduct = (productId, userId, token, product) => {
     })
     .catch(err => console.log(err));
 };
-export const updateaCategory = (productId, userId, token, product) => {
-  console.log('product');
-  console.log(JSON.stringify(product));
-  return fetch(`${API}/categories/${productId}/${userId}`, {
-    method: "PUT",
-    headers: {
-      Accept: "application/json",
-      Authorization: `Bearer ${token}`
-    },
-    body: {
-      name:JSON.stringify(product)
-    }
-  })
-    .then(response => {
-      return response.json();
-    })
-    .catch(err => console.log(err));
-};
+

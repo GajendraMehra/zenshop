@@ -52,13 +52,7 @@ const UpdateCategory = () => {
     updateaCategory(categoryId, user._id, token, { name }).then(
     
         data => {
-      if (data.error) {
-        setError(true);
-      } else {
-        setError("");
-        setSuccess(true);
-        setName("");
-      }
+    console.log(data);
     });
   };
 
