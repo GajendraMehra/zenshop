@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Base from "../core/Base";
 import { Link,useParams } from "react-router-dom";
-import { getCategories,getProduct,createaProduct } from "./helper/adminapicall";
+import { getCategories,getProduct,updateaProduct as updateProduct } from "./helper/adminapicall";
 import { isAuthenticated } from "../auth/helper";
 
 const UpdateProduct = () => {
@@ -17,7 +17,7 @@ const UpdateProduct = () => {
     category: "",
     loading: false,
     error: "",
-    createdProduct: "",
+    updatedProduct: "",
     getaRedirect: false,
     formData: ""
   });
@@ -31,19 +31,19 @@ const UpdateProduct = () => {
     category,
     loading,
     error,
-    createdProduct,
+    updatedProduct,
     getaRedirect,
     formData
   } = values;
   const successMessage = () => {
-    if (createdProduct) {
-      return <h4 className="text-success">{createdProduct} created successfully</h4>;
+    if (updatedProduct) {
+      return <h4 className="text-success">{updatedProduct} updated successfully</h4>;
     }
   };
 
   const warningMessage = () => {
     if (error) {
-      return <h4 className="text-success">Failed to create category</h4>;
+      return <h4 className="text-success">Failed to update</h4>;
     }
   };
   const preloadCategories=()=>{
@@ -53,8 +53,9 @@ const UpdateProduct = () => {
           setValues({ ...values, error: data.error });
           return false
         } else {
-          console.log(values);
-          setValues({ ...values, categories: data.categoriess,formData:new FormData()});
+          console.log("Set states");
+          console.log(data  );
+          setValues({ categories: data.categoriess,formData:new FormData()});
           return true
         }
       }); 
@@ -65,21 +66,19 @@ const UpdateProduct = () => {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
+        preloadCategories()
         setValues({ ...values, 
             name: data.produdct.name, 
             price: data.produdct.price,
             description: data.produdct.description,
             stock: data.produdct.stock,
             // // stock: data.produdct.stock,
-            category: data.produdct.category,
-            formData: new FormData()
+            category: data.produdct.category._id,
+            // formData: new FormData()
            
         });
+        // console.log(price);
         // preloadCategories()
-       
-         
-       
-    
 
       }
     }); 
@@ -93,29 +92,32 @@ const UpdateProduct = () => {
   const onSubmit = (event) => {
     //
     event.preventDefault();
-  
-// console.log({...values});
-console.log(formData);
-    //backend request fired
-    createaProduct(user._id, token, formData).then(data => {
+    setValues({ ...values, error: "", loading: true });
+console.log(formData)
+console.log(productId);
+console.log(token);
+// console.log(formData);
+    updateProduct(productId, user._id, token, formData).then(
     
-      
-      if (data.error) {
-        setValues({ ...values, error: data.error });
-       
-      } else {
-        setValues({ ...values, createdProduct: data.product.name,  });
-       
+      data => {
+        console.log(data);
+        if (data.error) {
+          setValues({ ...values, error: data.error });
+        } else {
+          setValues({
+            ...values,
+           
+            loading: false,
+            updatedProduct: data.product.name
+          });
+        }
       }
-    });
+    );
   };
-
   const handleChange = name => event => {
-
-    // console.log(event.target.files[0]);
-    
     const value = name === "photo" ? event.target.files[0] : event.target.value;
     formData.set(name, value);
+    console.log(name);
     setValues({ ...values, [name]: value });
   };
 
@@ -190,7 +192,7 @@ console.log(formData);
         onClick={onSubmit}
         className="btn btn-outline-success mb-3"
       >
-        Create Product
+        Update Product
       </button>
     </form>
   );
