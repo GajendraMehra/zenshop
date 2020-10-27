@@ -95,12 +95,11 @@ exports.updateProduct = (req, res) => {
 
 
         let product = req.product;
-        console.log(fields);
-        console.log(product);
+   
 
         product = _.extend(product, fields)
         // destructure the fields 
-        console.log(product);
+
 
         let {
             name,
@@ -123,6 +122,9 @@ exports.updateProduct = (req, res) => {
         }
 
         product.save((err, product) => {
+            console.log(product);
+            console.log("==============");
+            console.log(err);
             if (err) {
                 return res.status(400).json({
                     error: "Failed",

@@ -4,6 +4,7 @@ const {
     validationResult
 } = require("express-validator");
 exports.getCategoryById = (req, res, next, id) => {
+    console.log(req);
     Category.findById(id).exec((err, category) => {
         if (err) {
             return res.status(400).json({
@@ -59,6 +60,7 @@ exports.getCategory = (req, res) => {
 
 
 exports.updateCategory = (req, res) => {
+    console.log(req.body);
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {

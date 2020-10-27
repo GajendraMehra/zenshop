@@ -5,6 +5,7 @@ const {
 
 
 exports.getUserById = (req, res, next, id) => {
+    console.log(req);
     User.findById(id).exec((err, user) => {
         if (err || !user) {
             return res.status(400).json({
@@ -14,7 +15,14 @@ exports.getUserById = (req, res, next, id) => {
         req.profile = user
         next()
     })
-
+    // Host: localhost:8080
+    // User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:81.0) Gecko/20100101 Firefox/81.0
+    // Accept: application/json
+    // Accept-Language: en-US,en;q=0.5
+    // Accept-Encoding: gzip, deflate
+    // Referer: http://localhost:3000/
+    // Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZjhhODg5NDQ5ZjBhNzM5ZmViMTg5MmQiLCJpYXQiOjE2MDM0NDk0MDl9.kq7IACiZdUpaKNFb5bqUZfCmbOPClHoHUcA-9oPrNZA
+    // Content-Type: text/plain;charset=UTF-8
 }
 
 

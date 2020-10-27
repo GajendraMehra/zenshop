@@ -30,14 +30,10 @@ router.post("/category/create/:userId", [
         min: 1
     })
 ], isSignedIn, isAuthenticated, isAdmin, saveCategory)
-router.get("/categories/:categoryId/:userId", isSignedIn, isAuthenticated, isAdmin, getCategory)
+router.get("/categories/:categoryId", getCategory)
 router.get("/categories", getAllCategories)
 
 
-router.put("/categories/:categoryId/:userId", [
-    check("name", "Name Required").isLength({
-        min: 1
-    })
-], isSignedIn, isAuthenticated, isAdmin, updateCategory)
+router.put("/categories/:categoryId/:userId",   updateCategory)
 router.delete("/categories/:categoryId/:userId", isSignedIn, isAuthenticated, isAdmin, removeCategory)
 module.exports = router
