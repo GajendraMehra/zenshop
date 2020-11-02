@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { isAutheticated } from "../auth/helper";
+import { isAuthenticated } from "../auth/helper/index";
 import { cartEmpty, loadCart } from "./helper/cartHelper";
 import { Link } from "react-router-dom";
 
@@ -15,8 +15,8 @@ const StripeCheckout = ({
     address: ""
   });
 
-  const token = isAutheticated() && isAutheticated().token;
-  const userId = isAutheticated() && isAutheticated().user._id;
+  const token = isAuthenticated() && isAuthenticated().token;
+  const userId = isAuthenticated() && isAuthenticated().user._id;
 
   const getFinalAmount = () => {
     let amount = 0;
@@ -27,7 +27,7 @@ const StripeCheckout = ({
   };
 
   const showStripeButton = () => {
-    return isAutheticated() ? (
+    return isAuthenticated() ? (
       <button className="btn btn-success">Pay with stripe</button>
     ) : (
       <Link to="/signin">
