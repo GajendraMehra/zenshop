@@ -5,12 +5,14 @@ import { API } from "../backend";
 import Base from "./Base";
 import Card from "./Card";
 import { getProducts } from "./helper/coreapicalls";
+import { Redirect } from "react-router-dom";
+import { addItemToCart } from "./helper/cartHelper"; 
 
 export default function Home() {
   console.log("API IS", API);
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(false);
-
+  
   const loadAllProduct = () => {
     getProducts().then(data => {
       console.log(data);
@@ -28,7 +30,7 @@ export default function Home() {
 
   return (
     <Base title="">
-      <div className="row">
+      <div className="row text-center">
       {products.map((product, index) => {
             return (
               <div key={index} className="col-4 mb-4">
